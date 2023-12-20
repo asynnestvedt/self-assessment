@@ -73,7 +73,7 @@ class AssessmentPage extends HTMLElement {
             <h4>Version 1.0 created Dec 16th 2023</h4>
 
             <h3>Overview</h3>
-            <p>The Competency Self-Assessment for Software Engineers is a multi-faceted evaluation tool designed to help professionals in the field of software engineering to introspectively analyze their skills and capabilities across seven key areas. These facets encompass the diverse set of skills required to excel in software engineering, ranging from technical knowledge to interpersonal abilities.</p>
+            <p>The Self-Assessment for Software Engineers is a multi-faceted tool designed to help professionals in the field of software engineering to introspectively analyze their skills and capabilities across seven key areas. These facets encompass the diverse set of skills required to excel in software engineering, ranging from technical knowledge to interpersonal abilities.</p>
             <p>Self-Assessment is not just a tool for self-evaluation but a catalyst for continuous growth and adaptation in a dynamic and challenging field. Regular self-reflection and assessment enable software engineers to thrive and excel in their careers while contributing effectively to their teams and organizations.</p>
 
             <h3>Scoring</h3>
