@@ -97,10 +97,8 @@ class RadarChart extends HTMLElement {
             _data.charts.map(e => e.score)
         ]
 
-        const dimensions = 7 // todo - derive from data
+        const dimensions = 7 // TODO: derive from data
         const options = {
-            width: 900,
-            height: 900,
             padding: 110,
             levels: 5,
             maxValue: 10,
@@ -116,7 +114,7 @@ class RadarChart extends HTMLElement {
         const angleSlice = (Math.PI * 2) / dimensions
         const scaleFactor = (radius / MAX_RADIUS)
         for (let i = 0; i < dimensions; i++) {
-            const angle = angleSlice * i
+            const angle = angleSlice * i - Math.PI / 2
             const x = center.x + radius * Math.cos(angle)
             const y = center.y + radius * Math.sin(angle)
 
@@ -132,15 +130,22 @@ class RadarChart extends HTMLElement {
 
             // Adjusted axis labels positioning
             let labelRadiusOffset = 20 * scaleFactor// Default offset
-            // Increase offset for labels on the left (π) and right (0, 2π) sides
-            if (angle < 0.0001 || Math.abs(angle - Math.PI) < 1.0001 || Math.abs(angle - 2 * Math.PI) < 0.0001) {
-                labelRadiusOffset = (radius / 200) * 50
-            }
-            // Decrease offset for labels on the top (π/2) and bottom (3π/2)
-            if (Math.abs(angle - Math.PI / 2) < 0.0001 || Math.abs(angle - 3 * Math.PI / 2) < 0.0001) {
-                labelRadiusOffset = (radius / 200) * 10
+            // // Increase offset for labels on the left (π) and right (0, 2π) sides
+            // if (angle < 0.0001 || Math.abs(angle - Math.PI) < 1.0001 || Math.abs(angle - 2 * Math.PI) < 0.0001) {
+            //     labelRadiusOffset = (radius / 200) * 30
+            // }
+            // // Decrease offset for labels on the top (π/2) and bottom (3π/2)
+            // if (Math.abs(angle - Math.PI / 2) < 0.0001 || Math.abs(angle - 3 * Math.PI / 2) < 0.0001) {
+            //     labelRadiusOffset = (radius / 200) * 10
+            // }
+
+            if ([-1.5707963267948966, 1.121997376282069, 2.019595277307724].includes(angle)) {
+                labelRadiusOffset = (radius / 200) * 20;
+            } else {
+                labelRadiusOffset = (radius / 200) * 40;
             }
 
+            // console.log(`i: ${i}, angle: ${angle}, radius: ${radius}, offset: ${labelRadiusOffset}` )
             const labelRadius = radius + labelRadiusOffset
             const labelX = center.x + labelRadius * Math.cos(angle)
             const labelY = center.y + labelRadius * Math.sin(angle)
@@ -165,12 +170,11 @@ class RadarChart extends HTMLElement {
         for (let level = 1; level <= levels; level++) {
             const levelPoints = []
             for (let i = 0; i < dimensions; i++) {
-                const angle = angleSlice * i
+                const angle = angleSlice * i - Math.PI / 2
                 const x = center.x + radius * (level / levels) * Math.cos(angle)
                 const y = center.y + radius * (level / levels) * Math.sin(angle)
                 levelPoints.push(`${x},${y}`)
             }
-            // Close the loop by adding the first point at the end
             levelPoints.push(levelPoints[0])
 
             const levelLine = document.createElementNS(svg.namespaceURI, 'polyline')
@@ -180,20 +184,23 @@ class RadarChart extends HTMLElement {
             levelLine.setAttribute('stroke-width', '1')
             svg.appendChild(levelLine)
 
-            const levelRadius = radius * ((level) / levels)
-
-            const levelValue = Math.round(maxValue * ((level) / levels))
-            const tickLabel = document.createElementNS(svg.namespaceURI, 'text')
-            tickLabel.setAttribute('x', center.x + levelRadius - 4)
-            tickLabel.setAttribute('y', center.y)
-            tickLabel.setAttribute('text-anchor', 'start')
-            tickLabel.setAttribute('alignment-baseline', 'middle')
-            tickLabel.setAttribute('font-size', 8 * scaleFactor)
-            tickLabel.textContent = levelValue
-            svg.appendChild(tickLabel)
+            const levelRadius = radius * (level / levels);
+            const levelValue = Math.round(maxValue * (level / levels));
+            const tickAngle = Math.PI / 2; // Bottom axis angle
+            const tickLabelX = center.x + levelRadius * Math.cos(tickAngle) * scaleFactor;
+            const tickLabelY = center.y - levelRadius * Math.sin(tickAngle) + 8;
+            
+            const tickLabel = document.createElementNS(svg.namespaceURI, 'text');
+            tickLabel.setAttribute('x', tickLabelX);
+            tickLabel.setAttribute('y', tickLabelY);
+            tickLabel.setAttribute('text-anchor', 'middle');
+            tickLabel.setAttribute('alignment-baseline', 'bottom');
+            tickLabel.setAttribute('font-size', 8 * scaleFactor);
+            tickLabel.textContent = levelValue;
+            svg.appendChild(tickLabel);
             const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
-            rect.setAttribute('x', center.x + levelRadius - 6 * scaleFactor)
-            rect.setAttribute('y', center.y - 6 * scaleFactor)
+            rect.setAttribute('x', tickLabelX - 6 * scaleFactor)
+            rect.setAttribute('y', tickLabelY - 6 * scaleFactor)
             rect.setAttribute('width', 10 * scaleFactor)
             rect.setAttribute('height', 10 * scaleFactor)
             rect.setAttribute('fill', 'white')
@@ -206,7 +213,7 @@ class RadarChart extends HTMLElement {
 
         dataSets.forEach((data, dataSetIndex) => {
             const points = data.map((value, i) => {
-                const angle = angleSlice * i
+                const angle = angleSlice * i - Math.PI / 2
                 const x = center.x + (radius * value / maxValue) * Math.cos(angle)
                 const y = center.y + (radius * value / maxValue) * Math.sin(angle)
                 return `${x},${y}`
