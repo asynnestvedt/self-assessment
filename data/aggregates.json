@@ -1,0 +1,125 @@
+[
+    {
+        "type":"expectation",
+        "name":"Mid Engineer Expectation",
+        "data": [
+            {
+                "facet": "Technical Expertise",
+                "weight": 10,
+                "score": 5
+            },
+            {
+                "facet": "Leadership Skills",
+                "weight": 7,
+                "score": 4
+            },
+            {
+                "facet": "Communication Skills",
+                "weight": 6,
+                "score": 5.4
+            },
+            {
+                "facet": "Problem-Solving Abilities",
+                "weight": 5,
+                "score": 5
+            },
+            {
+                "facet": "Project Management Skills",
+                "weight": 4,
+                "score": 4
+            },
+            {
+                "facet": "Adaptability and Learning Ability",
+                "weight": 3,
+                "score": 6.2
+            },
+            {
+                "facet": "Mentorship and Coaching Skills",
+                "weight": 2,
+                "score": 4
+            }
+        ]
+    },
+    {
+        "type":"expectation",
+        "name":"Senior Engineer Expectation",
+        "data": [
+            {
+                "facet": "Technical Expertise",
+                "weight": 10,
+                "score": 5
+            },
+            {
+                "facet": "Leadership Skills",
+                "weight": 7,
+                "score": 4
+            },
+            {
+                "facet": "Communication Skills",
+                "weight": 6,
+                "score": 5.4
+            },
+            {
+                "facet": "Problem-Solving Abilities",
+                "weight": 5,
+                "score": 5
+            },
+            {
+                "facet": "Project Management Skills",
+                "weight": 4,
+                "score": 4
+            },
+            {
+                "facet": "Adaptability and Learning Ability",
+                "weight": 3,
+                "score": 6.2
+            },
+            {
+                "facet": "Mentorship and Coaching Skills",
+                "weight": 2,
+                "score": 4
+            }
+        ]
+    },
+    {
+        "type":"expectation",
+        "name":"Lead Engineer Expectation",
+        "data": [
+            {
+                "facet": "Technical Expertise",
+                "weight": 10,
+                "score": 5
+            },
+            {
+                "facet": "Leadership Skills",
+                "weight": 7,
+                "score": 4
+            },
+            {
+                "facet": "Communication Skills",
+                "weight": 6,
+                "score": 5.4
+            },
+            {
+                "facet": "Problem-Solving Abilities",
+                "weight": 5,
+                "score": 5
+            },
+            {
+                "facet": "Project Management Skills",
+                "weight": 4,
+                "score": 4
+            },
+            {
+                "facet": "Adaptability and Learning Ability",
+                "weight": 3,
+                "score": 6.2
+            },
+            {
+                "facet": "Mentorship and Coaching Skills",
+                "weight": 2,
+                "score": 4
+            }
+        ]
+    }
+]
