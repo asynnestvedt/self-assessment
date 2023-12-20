@@ -4,63 +4,19 @@
 <head>
     <title>Competencies Assessment for Software Engineers</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="style.css" />
 </head>
 
 <body>
-    <my-modal></my-modal>
-    <my-nav></my-nav>
-    <my-container></my-container>
-
-    <script type="module">
-        fetch('/api/alldata')
-            .then(r => r.json())
-            .then(d => {
-                window.facets = d.facets
-                window._data = d
-            }).then(window.location = window.location.href.split("#")[0] + '#home')
-    </script>
+    <my-app></my-app>
+    <script src="./my-app.js" type="module"></script>
+    <script type="module" src="components/my-welcome.js" async></script>
     <script type="module" src="components/my-nav.js" async></script>
-    <script type="module" src="components/assessment-page.js"></script>
+    <script type="module" src="components/assessment-page.js" async></script>
     <script type="module" src="components/form-section.js" async></script>
     <script type="module" src="components/my-modal.js" async></script>
     <script type="module" src="components/radar-chart.js" async></script>
-
-    <script type="module">
-        window.addEventListener('load',()=>{
-            function initHashChangeListener() {
-                function onHashChange() {
-                    const hash = window.location.hash
-                    const path = hash.substring(1)
-                    const route = parseRoute(path)
-                    handleRouteChange(route)
-                }
-                function parseRoute(path) {
-                    return path.split('/')
-                }
-                function handleRouteChange(route) {
-                    const contentContainer = document.querySelector('my-container')
-                    contentContainer.innerHTML = ''
-
-                    if (route[0] === '') {
-                        contentContainer.innerHTML = '<h1>Loading</h1>'
-                    } else if (route[0] === 'home' || route[0] === '') {
-                        contentContainer.innerHTML = '<assessment-page></assessment-page>'
-                    } else if (route[0] === 'about') {
-                        contentContainer.innerHTML = '<h1>About Page</h1>'
-                    } else {
-                        contentContainer.innerHTML = '<h1>404 Not Found</h1>'
-                    }
-                }
-                window.addEventListener('hashchange', onHashChange)
-                onHashChange()
-            }
-
-            initHashChangeListener()
-        })
-    </script>
 </body>
 
 </html>
