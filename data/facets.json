@@ -1,6 +1,7 @@
 [
     {
         "facet": "Technical Expertise",
+        "weight": 10,
         "skills": [
             {
                 "name": "Knowledge of relevant technologies",
@@ -26,12 +27,23 @@
                 "name": "Understanding of industry standards",
                 "description": "Knowledge of and adherence to professional and industry-specific guidelines.",
                 "example": "Ensuring software meets ISO quality standards."
+            },
+            {
+                "name": "Data Science Fundamentals",
+                "description": "Grasping core concepts and techniques in data science.",
+                "example": "Applying statistical analysis to derive insights from large datasets."
+            },
+            {
+                "name": "Artificial Intelligence Assistive Technologies",
+                "description": "Leveraging AI or ML tools to enhance and streamline software engineering workflows.",
+                "example": "Using an LLM to generate or review code."
             }
         ],
         "icon": "code"
     },
     {
         "facet": "Leadership Skills",
+        "weight": 7,
         "skills": [
             {
                 "name": "Accountability",
@@ -49,25 +61,16 @@
                 "example": "Choosing the best course of action during a critical system outage."
             },
             {
-                "name": "Conflict resolution",
-                "description": "Effectively addressing and resolving workplace disagreements.",
-                "example": "Mediating between team members to resolve a dispute."
-            },
-            {
                 "name": "Strategic planning and vision",
                 "description": "Setting long-term goals and outlining a clear path to achieve them.",
                 "example": "Developing a five-year growth plan for the department."
-            },
-            {
-                "name": "Delegation and empowerment",
-                "description": "Assigning tasks to the right people and empowering them to succeed.",
-                "example": "Trusting a team member with a critical project component based on their expertise."
             }
         ],
         "icon": "groups"
     },
     {
         "facet": "Communication Skills",
+        "weight": 6,
         "skills": [
             {
                 "name": "Clarity in communication",
@@ -83,22 +86,13 @@
                 "name": "Presentation abilities",
                 "description": "Effectively delivering information to audiences.",
                 "example": "Giving a compelling and clear presentation on a new project proposal."
-            },
-            {
-                "name": "Effectiveness in meetings",
-                "description": "Contributing valuable insights and keeping discussions on track.",
-                "example": "Leading a meeting efficiently while ensuring all voices are heard."
-            },
-            {
-                "name": "Communicating with non-technical stakeholders",
-                "description": "Bridging the gap between technical and non-technical realms.",
-                "example": "Translating technical jargon into business language for stakeholders."
             }
         ],
         "icon": "communication"
     },
     {
         "facet": "Problem-Solving Abilities",
+        "weight": 5,
         "skills": [
             {
                 "name": "Analytical thinking",
@@ -114,22 +108,13 @@
                 "name": "Efficiency in troubleshooting",
                 "description": "Quickly and effectively identifying and solving problems.",
                 "example": "Rapidly diagnosing and fixing a critical software bug."
-            },
-            {
-                "name": "Risk assessment",
-                "description": "Evaluating potential challenges and their impacts.",
-                "example": "Identifying and mitigating risks in a project plan."
-            },
-            {
-                "name": "Decision-making in complex situations",
-                "description": "Choosing the best course of action among various alternatives.",
-                "example": "Deciding the best approach to meet a tight deadline without sacrificing quality."
             }
         ],
         "icon": "tactic"
     },
     {
         "facet": "Project Management Skills",
+        "weight": 4,
         "skills": [
             {
                 "name": "Planning and organization",
@@ -145,22 +130,13 @@
                 "name": "Resource allocation",
                 "description": "Distributing resources optimally to achieve project goals.",
                 "example": "Allocating team members and budget to different project phases."
-            },
-            {
-                "name": "Risk and change management",
-                "description": "Handling unexpected changes and potential risks.",
-                "example": "Adjusting project plans in response to unforeseen challenges."
-            },
-            {
-                "name": "Project tracking and reporting",
-                "description": "Monitoring progress and keeping stakeholders informed.",
-                "example": "Regularly updating the team and management on project status."
             }
         ],
         "icon": "schedule"
     },
     {
         "facet": "Adaptability and Learning Ability",
+        "weight": 3,
         "skills": [
             {
                 "name": "Learning new technologies",
@@ -176,22 +152,13 @@
                 "name": "Openness to feedback",
                 "description": "Welcoming and acting on feedback to improve.",
                 "example": "Using peer review comments to refine a project approach."
-            },
-            {
-                "name": "Resilience under stress",
-                "description": "Maintaining performance under pressure.",
-                "example": "Staying focused and effective during high-stress project phases."
-            },
-            {
-                "name": "Continuous improvement",
-                "description": "Seeking ways to improve oneself and one's work.",
-                "example": "Regularly attending workshops to enhance professional skills."
             }
         ],
         "icon": "psychology"
     },
     {
         "facet": "Mentorship and Coaching Skills",
+        "weight": 2,
         "skills": [
             {
                 "name": "Ability to teach and guide",
@@ -202,21 +169,6 @@
                 "name": "Providing constructive feedback",
                 "description": "Offering helpful and actionable feedback.",
                 "example": "Giving specific suggestions for improvement during a performance review."
-            },
-            {
-                "name": "Encouraging team development",
-                "description": "Fostering a team environment conducive to growth.",
-                "example": "Creating opportunities for team members to develop new skills."
-            },
-            {
-                "name": "Recognizing individual talents",
-                "description": "Identifying and nurturing the unique abilities of team members.",
-                "example": "Assigning tasks based on each team member's strengths."
-            },
-            {
-                "name": "Creating a supportive environment",
-                "description": "Building a workplace culture that supports team well-being and growth.",
-                "example": "Establishing a mentorship program within the department."
             }
         ],
         "icon": "diversity_3"
