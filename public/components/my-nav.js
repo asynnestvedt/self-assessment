@@ -6,10 +6,14 @@ const style =
         -webkit-box-shadow: 0 0 70px #fff;
         -moz-box-shadow: 0 0 70px #fff;
         box-shadow: 0 0 70px #fff;
-        width: 100%;
+        width: 80%;
         top: 0px;
+        left: 10%;
         z-index: 1000;
-        padding: 0px 30px;
+    }
+
+    ul {
+        padding-inline-start: 0;
     }
 
     .decor {
@@ -184,16 +188,15 @@ const style =
 const newstyle = document.createElement('style')
 newstyle.id = 'style_MyNav'
 newstyle.innerHTML = style
-document.head.appendChild(newstyle)
 
 class MyNav extends HTMLElement {
     constructor() {
         super()
-        this.innerHTML = MyNav.template()
-    }
-
-    connectedCallback() {
-        
+        const content = document.createElement('div')
+        content.innerHTML = MyNav.template()
+        const shadow = this.attachShadow({mode: 'open'})
+        shadow.appendChild(newstyle)
+        shadow.appendChild(content)
     }
 
     static template() {
@@ -202,14 +205,15 @@ class MyNav extends HTMLElement {
         <span class="decor"></span>
         <nav>
             <ul class="primary">
-            <li><a href="#home">Assessment</a></li>
+            <li><a href="#assessment">Assessment</a></li>
             <li><a href="#page-history">History</a></li>
             <!--<li><a href="#page-role-targets">Role Targets</a></li>-->
             <li><a>About</a>
                 <ul class="sub">
                     <li>
                         <a target="__blank" href="https://github.com/asynnestvedt">
-                            <img width="50" src="./assets/github-mark.png" alt="github logo" /><br>Made by Alan Synnestvedt
+                            <img width="50" src="./assets/github-mark.png" alt="github logo" /><br>
+                            Made by Alan Synnestvedt
                         </a>
                     </li>
                 </ul>
@@ -219,6 +223,5 @@ class MyNav extends HTMLElement {
     </header>`
     }
 }
-
 
 customElements.define('my-nav', MyNav)
