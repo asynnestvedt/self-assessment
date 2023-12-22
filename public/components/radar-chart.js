@@ -8,7 +8,7 @@ class RadarChart extends HTMLElement {
         /* html */`
         <div class="container" style="position: relative">
             <div class="legend-container"></div>
-            <div style="margin: auto" class="svg-container">
+            <div class="svg-container">
         </div>`
         this.props = {}
     }
@@ -199,10 +199,12 @@ class RadarChart extends HTMLElement {
             tickLabel.textContent = levelValue;
             svg.appendChild(tickLabel);
             const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect')
-            rect.setAttribute('x', tickLabelX - 6 * scaleFactor)
-            rect.setAttribute('y', tickLabelY - 6 * scaleFactor)
-            rect.setAttribute('width', 10 * scaleFactor)
-            rect.setAttribute('height', 10 * scaleFactor)
+            rect.setAttribute('x', tickLabelX - 5.5 * scaleFactor)
+            rect.setAttribute('y', tickLabelY - 7.5 * scaleFactor)
+            tickLabel.setAttribute('text-anchor', 'middle');
+            tickLabel.setAttribute('alignment-baseline', 'bottom');
+            rect.setAttribute('width', 11 * scaleFactor)
+            rect.setAttribute('height', 11 * scaleFactor)
             rect.setAttribute('fill', 'white')
             svg.insertBefore(rect, tickLabel)
         }
