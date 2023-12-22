@@ -43,7 +43,6 @@ class MyModal extends HTMLElement {
         modalContent = this.querySelector('modal-content')
 
         overlay.addEventListener('click', () => MyModal.hideModal())
-        modalContent.addEventListener('click', () => MyModal.hideModal())
     }
 
     static template() {

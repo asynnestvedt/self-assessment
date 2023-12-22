@@ -69,7 +69,7 @@ class AssessmentPage extends HTMLElement {
     static template() {
         return /* html */`
         <article>
-            <h2>Competencies Assessment for Software Engineers</h2>
+            <h2>Self-Assessment for Software Engineers</h2>
             <h4>Version 1.0 created Dec 16th 2023</h4>
 
             <h3>Overview</h3>

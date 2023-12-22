@@ -38,7 +38,6 @@ app.get("/api/alldata", (req, res) => {
     } catch (e) {
         res.status(500).send("Error reading data file")
     }
-
 })
 
 // serve static files after routes
