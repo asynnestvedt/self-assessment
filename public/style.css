@@ -65,10 +65,6 @@ body {
 
 
 /** FORM STYLES **/
-form {
-    font-family: Arial, sans-serif;
-}
-
 form select {
     width: 100%;
     padding: 8px;
