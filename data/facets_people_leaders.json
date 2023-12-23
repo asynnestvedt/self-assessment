@@ -1,0 +1,134 @@
+[
+    {
+        "facet": "Leadership and People Management",
+        "weight": 10,
+        "skills": [
+            {
+                "name": "Team Leadership",
+                "description": "Leading and inspiring a team to achieve goals.",
+                "example": "Setting clear objectives and motivating the team to deliver high-quality work."
+            },
+            {
+                "name": "Conflict Resolution",
+                "description": "Effectively resolving disputes and maintaining a positive work environment.",
+                "example": "Mediating disagreements between team members to find mutually beneficial solutions."
+            },
+            {
+                "name": "Performance Management",
+                "description": "Assessing and managing employee performance.",
+                "example": "Conducting performance reviews and setting development goals for team members."
+            },
+            {
+                "name": "Employee Development",
+                "description": "Fostering the growth and development of team members.",
+                "example": "Identifying training opportunities and career progression paths for employees."
+            },
+            {
+                "name": "Diversity and Inclusion",
+                "description": "Promoting a diverse and inclusive workplace culture.",
+                "example": "Implementing policies and practices that support diversity and inclusion."
+            }
+        ],
+        "icon": "leadership"
+    },
+    {
+        "facet": "Strategic Planning and Vision",
+        "weight": 8,
+        "skills": [
+            {
+                "name": "Long-term Strategy Development",
+                "description": "Developing and communicating long-term business strategies.",
+                "example": "Creating a five-year strategic plan for the technology department."
+            },
+            {
+                "name": "Business Acumen",
+                "description": "Understanding and applying business knowledge to decision-making.",
+                "example": "Aligning technology initiatives with overall business objectives."
+            },
+            {
+                "name": "Change Management",
+                "description": "Guiding the organization through changes and transformations.",
+                "example": "Leading the transition to a new company-wide software system."
+            }
+        ],
+        "icon": "strategy"
+    },
+    {
+        "facet": "Communication and Collaboration",
+        "weight": 7,
+        "skills": [
+            {
+                "name": "Effective Communication",
+                "description": "Conveying information clearly and effectively to various audiences.",
+                "example": "Communicating complex technical issues to non-technical stakeholders."
+            },
+            {
+                "name": "Team Collaboration",
+                "description": "Encouraging collaboration and teamwork among employees.",
+                "example": "Facilitating cross-functional projects to enhance team collaboration."
+            },
+            {
+                "name": "Stakeholder Management",
+                "description": "Managing relationships with key stakeholders.",
+                "example": "Engaging with senior management to align department goals with company objectives."
+            }
+        ],
+        "icon": "communication"
+    },
+    {
+        "facet": "Operational Excellence",
+        "weight": 6,
+        "skills": [
+            {
+                "name": "Project Management",
+                "description": "Overseeing projects from conception to completion.",
+                "example": "Managing a large-scale software development project."
+            },
+            {
+                "name": "Resource Allocation",
+                "description": "Optimally allocating resources for maximum efficiency and effectiveness.",
+                "example": "Balancing budget constraints with team needs to optimize project outcomes."
+            },
+            {
+                "name": "Process Improvement",
+                "description": "Identifying and implementing improvements in business processes.",
+                "example": "Streamlining workflow processes to increase team productivity."
+            }
+        ],
+        "icon": "operations"
+    },
+    {
+        "facet": "Technical Understanding",
+        "weight": 5,
+        "skills": [
+            {
+                "name": "Technical Literacy",
+                "description": "Understanding key technical concepts and trends.",
+                "example": "Keeping abreast of the latest technologies relevant to the team's work."
+            },
+            {
+                "name": "Technology Strategy",
+                "description": "Aligning technology initiatives with business goals.",
+                "example": "Developing a technology roadmap that supports the strategic business plan."
+            }
+        ],
+        "icon": "tech"
+    },
+    {
+        "facet": "Innovation and Creativity",
+        "weight": 4,
+        "skills": [
+            {
+                "name": "Fostering Innovation",
+                "description": "Encouraging creative thinking and innovative solutions among the team.",
+                "example": "Implementing a company-wide ideation platform for innovative project ideas."
+            },
+            {
+                "name": "Adaptability",
+                "description": "Adapting to new challenges and changing environments.",
+                "example": "Quickly shifting strategy in response to market changes."
+            }
+        ],
+        "icon": "innovation"
+    }
+]

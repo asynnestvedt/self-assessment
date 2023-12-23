@@ -1,0 +1,139 @@
+[
+    {
+        "facet": "Product Management Expertise",
+        "weight": 10,
+        "skills": [
+            {
+                "name": "Understanding of Product Lifecycle",
+                "description": "Comprehensive knowledge of the product development process from inception to launch.",
+                "example": "Overseeing the development of a new software product from initial concept to market release."
+            },
+            {
+                "name": "Market and User Research",
+                "description": "Conducting and applying research to understand market needs and user preferences.",
+                "example": "Analyzing user feedback to guide the development of new product features."
+            },
+            {
+                "name": "Prioritization and Roadmapping",
+                "description": "Determining priorities and setting out a clear roadmap for product development.",
+                "example": "Creating a product roadmap that aligns with both user needs and business goals."
+            },
+            {
+                "name": "Product Strategy Formulation",
+                "description": "Developing and articulating clear strategies for product growth and evolution.",
+                "example": "Defining a long-term vision for a software suite in a competitive market."
+            },
+            {
+                "name": "Backlog Management",
+                "description": "Effectively managing and prioritizing the product backlog.",
+                "example": "Regularly refining and prioritizing the backlog to ensure agile development."
+            },
+            {
+                "name": "Stakeholder Communication",
+                "description": "Communicating effectively with stakeholders to align expectations and deliverables.",
+                "example": "Facilitating meetings with stakeholders to discuss product progress and gather feedback."
+            }
+        ],
+        "icon": "strategy"
+    },
+    {
+        "facet": "Technical Skills",
+        "weight": 8,
+        "skills": [
+            {
+                "name": "Understanding of Software Development",
+                "description": "In-depth knowledge of software development processes and methodologies.",
+                "example": "Applying agile methodologies to streamline product development."
+            },
+            {
+                "name": "Tech Stack Proficiency",
+                "description": "Familiarity with the technologies used in product development.",
+                "example": "Evaluating and selecting appropriate technologies for new product features."
+            },
+            {
+                "name": "Data-Driven Decision Making",
+                "description": "Using data to inform and guide product decisions.",
+                "example": "Analyzing user data to decide on new product features or improvements."
+            }
+        ],
+        "icon": "code"
+    },
+    {
+        "facet": "Leadership and Collaboration",
+        "weight": 7,
+        "skills": [
+            {
+                "name": "Team Leadership",
+                "description": "Leading and motivating a cross-functional product team.",
+                "example": "Guiding a team through the development cycle to ensure timely delivery of features."
+            },
+            {
+                "name": "Cross-Departmental Collaboration",
+                "description": "Working effectively with various departments to achieve product goals.",
+                "example": "Coordinating with the marketing team to align product launch strategies."
+            },
+            {
+                "name": "Conflict Resolution",
+                "description": "Addressing and resolving conflicts within the team or between departments.",
+                "example": "Mediating disagreements between development and design teams."
+            }
+        ],
+        "icon": "groups"
+    },
+    {
+        "facet": "Communication and Interpersonal Skills",
+        "weight": 6,
+        "skills": [
+            {
+                "name": "Effective Communication",
+                "description": "Articulating ideas and plans clearly to team members, stakeholders, and executives.",
+                "example": "Presenting product updates in a clear and concise manner during company-wide meetings."
+            },
+            {
+                "name": "Active Listening",
+                "description": "Paying attention to and addressing team and stakeholder feedback.",
+                "example": "Taking into account developer concerns during planning meetings."
+            },
+            {
+                "name": "Negotiation Skills",
+                "description": "Negotiating effectively to balance the needs of stakeholders, users, and the team.",
+                "example": "Negotiating resource allocation with upper management to meet critical milestones."
+            }
+        ],
+        "icon": "communication"
+    },
+    {
+        "facet": "Adaptability and Continuous Learning",
+        "weight": 5,
+        "skills": [
+            {
+                "name": "Adaptability to Change",
+                "description": "Adjusting quickly to changes in the market or project direction.",
+                "example": "Pivoting product strategy in response to a new competitor in the market."
+            },
+            {
+                "name": "Continuous Skill Upgradation",
+                "description": "Constantly updating skills and knowledge to stay relevant in a rapidly evolving field.",
+                "example": "Attending workshops on the latest product management methodologies."
+            }
+        ],
+        "icon": "psychology"
+    },
+    {
+        "facet": "Analytical and Problem-Solving Abilities",
+        "weight": 4,
+        "skills": [
+            {
+                "name": "Analytical Thinking",
+                "description": "Approaching problems logically and with a data-driven mindset.",
+                "example": "Using analytics to identify the cause of a drop in user engagement."
+            },
+            {
+                "name": "Innovative Problem Solving",
+                "description": "Crafting creative solutions to complex product challenges.",
+                "example": "Designing an innovative feature to address a longstanding user pain point."
+            }
+        ],
+        "icon": "tactic"
+    }
+]
