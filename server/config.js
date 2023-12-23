@@ -6,7 +6,9 @@ const DATA_FILE_ASSESSMENTS = path.join(DATA_DIR, "assessments.json")
 const DATA_FILE_TEAMS = path.join(DATA_DIR, "teams.json")
 const DATA_FILE_AGGREGATES = path.join(DATA_DIR, "aggregates.json")
 const DATA_FILE_ROLES = path.join(DATA_DIR, "roles.json")
-const DATA_FILE_FACETS = path.join(DATA_DIR, "facets.json")
+const DATA_FILE_FACETS_SE = path.join(DATA_DIR, "facets_software_engineers.json")
+const DATA_FILE_FACETS_PO = path.join(DATA_DIR, "facets_product_owners.json")
+const DATA_FILE_FACETS_MGMT = path.join(DATA_DIR, "facets_people_leaders.json")
 const KEYPATH = "server.key"
 const CERTPATH = "server.cert"
 const SSLOPTiONSEXIST = fs.existsSync(KEYPATH) && fs.existsSync(CERTPATH)
@@ -32,10 +34,6 @@ if (!fs.existsSync(DATA_FILE_ROLES)) {
     fs.writeFileSync(DATA_FILE_ROLES, "[]", "utf8")
 }
 
-if (!fs.existsSync(DATA_FILE_FACETS)) {
-    fs.writeFileSync(DATA_FILE_FACETS, "[]", "utf8")
-}
-
 /**
  * Configuration object for the application.
  * @typedef {Object} AppConfig
@@ -44,7 +42,9 @@ if (!fs.existsSync(DATA_FILE_FACETS)) {
  * @property {string} DATA_FILE_TEAMS - The path to the teams data file.
  * @property {string} DATA_FILE_AGGREGATES - The path to the aggregates data file.
  * @property {string} DATA_FILE_ROLES - The path to the roles data file.
- * @property {string} DATA_FILE_FACETS - The path to the facets data file.
+ * @property {string} DATA_FILE_FACETS_SE - The path to the facets data file.
+ * @property {string} DATA_FILE_FACETS_PO - The path to the facets data file.
+ * @property {string} DATA_FILE_FACETS_MGMT - The path to the facets data file.
  * @property {string} KEYPATH - The path to the server key file.
  * @property {string} CERTPATH - The path to the server certificate file.
  * @property {boolean} SSLOPTiONSEXIST - Indicates whether both the server key and certificate files exist.
@@ -61,7 +61,9 @@ module.exports = {
     DATA_FILE_TEAMS,
     DATA_FILE_AGGREGATES,
     DATA_FILE_ROLES,
-    DATA_FILE_FACETS,
+    DATA_FILE_FACETS_SE,
+    DATA_FILE_FACETS_PO,
+    DATA_FILE_FACETS_MGMT,
     KEYPATH,
     CERTPATH,
     SSLOPTiONSEXIST

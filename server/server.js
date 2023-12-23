@@ -32,7 +32,11 @@ app.get("/api/alldata", (req, res) => {
             teams: JSON.parse(fs.readFileSync(config.DATA_FILE_TEAMS)),
             aggregates: JSON.parse(fs.readFileSync(config.DATA_FILE_AGGREGATES)),
             roles: JSON.parse(fs.readFileSync(config.DATA_FILE_ROLES)),
-            facets: JSON.parse(fs.readFileSync(config.DATA_FILE_FACETS))
+            facets: {
+                "Software Engineer": JSON.parse(fs.readFileSync(config.DATA_FILE_FACETS_SE)),
+                "Product Owner": JSON.parse(fs.readFileSync(config.DATA_FILE_FACETS_PO)),
+                "People Leader": JSON.parse(fs.readFileSync(config.DATA_FILE_FACETS_MGMT))
+            }
         }
         res.status(200).json(payload)
     } catch (e) {
