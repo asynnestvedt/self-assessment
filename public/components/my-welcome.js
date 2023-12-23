@@ -1,15 +1,14 @@
-import { Component } from './common.js'
-import { showModal } from './my-modal.js'
+import { showModal, hideModal } from './my-modal.js'
 
-class MyWelcome extends Component {
+class MyWelcome extends HTMLElement {
     constructor() {
         super()
-        this.data = window._data // Assuming window._data is available and formatted correctly
+        this.data = window._data
         this.modalEl = document.querySelector('my-modal')
+        showModal(MyWelcome.template(this.data))
     }
 
     connectedCallback() {
-        super.connectedCallback()
         this.populateFormWithCookies()
         this.addFormSubmitEventListener()
         this.addSelectChangeListeners()
@@ -93,7 +92,10 @@ class MyWelcome extends Component {
         const content = /*html*/`
             <form>
                 <h1>Welcome!</h1>
-                <p>Please select your details:</p>
+                <p>
+                    You've been invited to take part in the software engineering self-assessment.
+                    This is an experiment in professional development and your feedback is crucial to the success of this initiative. It's important to note that individual data is not reviewed or made visible elsewhere. Let's get's started.
+                </p>
                 <fieldset>
                     <label for="jobRole">Job Role</label>
                     <select name="jobRole">${templateOption(data.roles.map(role => ({label: role, value: role})), cookie['jobRole'])}</select>
@@ -114,7 +116,7 @@ class MyWelcome extends Component {
         ['jobRole', 'teamName', 'person'].forEach(name => {
             document.cookie = `${name}=${encodeURIComponent(form[name].value)}; path=/`;
         });
-        this.modalEl.constructor.hideModal()
+        hideModal()
     }
 
     static getCookie() {
