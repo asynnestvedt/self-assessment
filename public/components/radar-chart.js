@@ -1,3 +1,5 @@
+// used for scaling calculation
+// TODO: detect these values
 const MAX_RADIUS = 200
 const MAX_WIDTH = 680
 
@@ -19,40 +21,15 @@ class RadarChart extends HTMLElement {
             this.chart.destroy()
             this.chart = null
         }
+        this.render()
     }
 
     connectedCallback() {
-        this._data = {
-            charts: [{
-                'facet': 'Technical Expertise',
-                'score': '6.6'
-            }, {
-                'facet': 'Leadership Skills',
-                'score': '6.6'
-            }, {
-                'facet': 'Communication Skills',
-                'score': '6.6'
-            }, {
-                'facet': 'Problem-Solving Abilities',
-                'score': '6.6'
-            }, {
-                'facet': 'Project Management Skills',
-                'score': '6.6'
-            }, {
-                'facet': 'Adaptability and Learning Ability',
-                'score': '6.6'
-            }, {
-                'facet': 'Mentorship and Coaching Skills',
-                'score': '6.6'
-            }
-            ]
-        }
-
         this.render()
     }
 
     render() {
-        const myColors = [
+        const defaultColors = [
             'rgba(52, 152, 219, 0.4)', // Vivid Blue
             'rgba(46, 204, 113, 0.4)', // Emerald Green
             'rgba(241, 196, 15, 0.4)', // Sunflower Yellow
@@ -66,48 +43,25 @@ class RadarChart extends HTMLElement {
             'rgba(149, 165, 166, 0.4)' // Concrete Gray
         ]
 
-        const _data = {
-            charts: [{
-                'facet': 'Technical Expertise',
-                'score': '6.6'
-            }, {
-                'facet': 'Leadership Skills',
-                'score': '6.6'
-            }, {
-                'facet': 'Communication Skills',
-                'score': '6.6'
-            }, {
-                'facet': 'Problem-Solving Abilities',
-                'score': '6.6'
-            }, {
-                'facet': 'Project Management Skills',
-                'score': '6.6'
-            }, {
-                'facet': 'Adaptability and Learning Ability',
-                'score': '6.6'
-            }, {
-                'facet': 'Mentorship and Coaching Skills',
-                'score': '6.6'
-            }
-            ]
-        }
+        
 
-        const dataSets = [
-            _data.charts.map(() => 8.5),
-            _data.charts.map(e => e.score)
-        ]
-
-        const dimensions = 7 // TODO: derive from data
-        const options = {
-            padding: 110,
-            levels: 5,
-            maxValue: 10,
-            labels: ['Technical Expertise', 'Leadership', 'Communication', 'Problem-Solving', 'Project Management', 'Adaptability and Learning', 'Mentorship and Coaching'],
-            colors: myColors
+        const labels = JSON.parse(this.dataset.labels)
+        const dimensions = labels.length
+        const legend = JSON.parse(this.dataset.legend || "[]")
+        const datasets = JSON.parse(this.dataset.values || "[[]]")
+ 
+        this.options = {
+            padding: parseInt(this.dataset.padding || "110"),
+            levels: parseInt(this.dataset.levels || "5"),
+            maxValue: parseInt(this.dataset.maxValue || "10"),
+            labels: labels,
+            colors: defaultColors
         }
-        RadarChart.draw(document.querySelector('.svg-container'), dataSets, dimensions, options)
-        const initialVisibility = dataSets.map(() => true)
-        RadarChart.createLegend(document.querySelector('.legend-container'), dataSets, myColors, initialVisibility)
+        RadarChart.draw(document.querySelector('.svg-container'), datasets, dimensions, this.options)
+        if (legend.length > 0) {
+            const initialVisibility = datasets.map(() => true)
+            RadarChart.createLegend(document.querySelector('.legend-container'), legend, this.options.colors, initialVisibility)
+        }
     }
 
     static drawRadarAxes(svg, center, radius, dimensions, labels) {
@@ -129,23 +83,14 @@ class RadarChart extends HTMLElement {
             svg.appendChild(line)
 
             // Adjusted axis labels positioning
-            let labelRadiusOffset = 20 * scaleFactor// Default offset
-            // // Increase offset for labels on the left (π) and right (0, 2π) sides
-            // if (angle < 0.0001 || Math.abs(angle - Math.PI) < 1.0001 || Math.abs(angle - 2 * Math.PI) < 0.0001) {
-            //     labelRadiusOffset = (radius / 200) * 30
-            // }
-            // // Decrease offset for labels on the top (π/2) and bottom (3π/2)
-            // if (Math.abs(angle - Math.PI / 2) < 0.0001 || Math.abs(angle - 3 * Math.PI / 2) < 0.0001) {
-            //     labelRadiusOffset = (radius / 200) * 10
-            // }
-
+            let labelRadiusOffset
+            // TODO: may need to find a generalizable way to specify the offset bases on the angle
             if ([-1.5707963267948966, 1.121997376282069, 2.019595277307724].includes(angle)) {
                 labelRadiusOffset = (radius / 200) * 20;
             } else {
                 labelRadiusOffset = (radius / 200) * 40;
             }
 
-            // console.log(`i: ${i}, angle: ${angle}, radius: ${radius}, offset: ${labelRadiusOffset}` )
             const labelRadius = radius + labelRadiusOffset
             const labelX = center.x + labelRadius * Math.cos(angle)
             const labelY = center.y + labelRadius * Math.sin(angle)
@@ -213,7 +158,7 @@ class RadarChart extends HTMLElement {
     static drawRadarData(svg, center, radius, dataSets, maxValue, dimensions, colors) {
         const angleSlice = (Math.PI * 2) / dimensions
 
-        dataSets.forEach((data, dataSetIndex) => {
+        dataSets.forEach((data, i) => {
             const points = data.map((value, i) => {
                 const angle = angleSlice * i - Math.PI / 2
                 const x = center.x + (radius * value / maxValue) * Math.cos(angle)
@@ -223,17 +168,20 @@ class RadarChart extends HTMLElement {
 
             const polygon = document.createElementNS(svg.namespaceURI, 'polygon')
             polygon.setAttribute('points', points)
-            polygon.setAttribute('stroke', colors[dataSetIndex])
-            polygon.setAttribute('stroke-width', '2')
-            polygon.setAttribute('fill', colors[dataSetIndex])
-            polygon.setAttribute('class', `radar-dataset radar-dataset-${dataSetIndex}`)
+            polygon.setAttribute('stroke', colors[i])
+            polygon.setAttribute('stroke-width', '4')
+            polygon.setAttribute('fill', colors[i])
+            polygon.setAttribute('class', `radar-dataset radar-dataset-${i}`)
 
-            // Hover effect
             polygon.addEventListener('mouseenter', () => {
-                polygon.style.fill = colors[dataSetIndex + 6] // More opacity on hover
+                const altColor = colors[(i + 6) % colors.length]
+                polygon.style.fill = altColor
+                polygon.style.stroke = altColor
             })
             polygon.addEventListener('mouseleave', () => {
-                polygon.style.fill = colors[dataSetIndex] // Reset opacity
+                const origColor = colors[i]
+                polygon.style.fill = origColor
+                polygon.style.stroke = origColor
             })
 
             svg.appendChild(polygon)
@@ -255,18 +203,17 @@ class RadarChart extends HTMLElement {
             legend.style.right = `${10 * scaleFactor}px`
         }
 
-
         function resizeLegend() {
             // Clear the legend and reposition it
             legend.innerHTML = ''
             positionLegend()
 
-            dataSets.forEach((_, dataSetIndex) => {
+            dataSets.forEach((_, i) => {
                 const label = document.createElement('label')
                 const checkbox = document.createElement('input')
                 checkbox.type = 'checkbox'
-                checkbox.checked = initialVisibility[dataSetIndex]
-                checkbox.dataset.index = dataSetIndex
+                checkbox.checked = initialVisibility[i]
+                checkbox.dataset.index = i
 
                 checkbox.addEventListener('change', (e) => {
                     const index = e.target.dataset.index
@@ -277,7 +224,7 @@ class RadarChart extends HTMLElement {
                 })
 
                 const colorBox = document.createElement('span')
-                colorBox.style.backgroundColor = colors[dataSetIndex]
+                colorBox.style.backgroundColor = colors[i]
                 colorBox.style.display = 'inline-block'
                 colorBox.style.width = '12px'
                 colorBox.style.height = '12px'
@@ -286,7 +233,7 @@ class RadarChart extends HTMLElement {
 
                 label.appendChild(checkbox)
                 label.appendChild(colorBox)
-                label.appendChild(document.createTextNode(`Dataset ${dataSetIndex + 1}`))
+                label.appendChild(document.createTextNode(dataSets[i]))
                 legend.appendChild(label)
             })
 

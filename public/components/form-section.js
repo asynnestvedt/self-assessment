@@ -95,7 +95,7 @@ const style =
         padding: 5px 10px;
         margin-left: 8px;
     }
-    
+
     .range-slider__value:after {
         position: absolute;
         top: 8px;
@@ -163,7 +163,7 @@ class FormSection extends HTMLElement {
     constructor() {
         super()
         this._name = this.getAttribute('data-ref')
-        this._data = window['facets'].filter(i => i.facet === this._name)[0]
+        this._data = JSON.parse(localStorage.getItem("facets") || "[]").filter(f=>f.facet===this._name)[0]
         this.innerHTML = FormSection.template(this._data)
     }
 
@@ -180,12 +180,11 @@ class FormSection extends HTMLElement {
         this.addListeners()
     }
 
-    static template_row(facet, skill) {
-        const snake_skill = skill.name.toLowerCase().replaceAll(' ', '_')
+    static template_row(facetId, skill) {
         return /* html */`
         <div class="range-slider">
-            <label for="${snake_skill}">${skill.name} <span class="info" skill="${skill.name}" description="${skill.description}" example="${skill.example}" href="#">&#9432;</span></label>
-            <input class="range-slider__range" facet="${facet}" name="${snake_skill}" type="range" value="5" min="1" max="10" step="1">
+            <label for="${facetId}:${skill.id}">${skill.name} <span class="info" skill="${skill.name}" description="${skill.description}" example="${skill.example}" href="#">&#9432;</span></label>
+            <input class="range-slider__range" facetId="${facetId}" name="${facetId}:${skill.id}" type="range" value="5" min="1" max="10" step="1">
             <span class="range-slider__value">5</span>
         </div>`
     }
@@ -196,17 +195,16 @@ class FormSection extends HTMLElement {
             <span class="material-symbols-outlined">${data.icon}
             </span>
             <legend>${data.facet}</legend>
-            ${data.skills.map(i => FormSection.template_row(data.facet, i)).join('')}
+            ${data.skills.map(i => FormSection.template_row(data.id, i)).join('')}
             <div class="avg_wrap">
                 <label>Average: </label>
-                <span id="${data.facet}_average"  class="range-slider__value">5</span>
+                <span id="${data.id}_average" class="range-slider__value">5</span>
             </div>
         </fieldset>`
     }
 
     addListeners() {
         this.rangeSlider()
-        document.get
     }
 
     rangeSlider() {
@@ -219,7 +217,7 @@ class FormSection extends HTMLElement {
 
             range.addEventListener('input', function () {
                 value.textContent = this.value
-                updateAverage(this.getAttribute('facet'))
+                updateAverage(this.getAttribute('facetId'))
             })
         })
     }
@@ -239,16 +237,16 @@ class FormSection extends HTMLElement {
 
 
 
-function updateAverage(facet) {
+function updateAverage(facetId) {
     let total = 0
     let count = 0
-    const inputs = document.querySelectorAll(`input[facet="${facet}"]`)
+    const inputs = document.querySelectorAll(`input[facetId="${facetId}"]`)
     inputs.forEach(function (input) {
         total += parseInt(input.value)
         count++
     })
     const average = total / count
-    document.getElementById(facet + '_average').innerText = average.toFixed(2)
+    document.getElementById(facetId + '_average').innerText = average.toFixed(2)
 }
 
 customElements.define('form-section', FormSection)

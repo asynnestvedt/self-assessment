@@ -1,3 +1,4 @@
+import { MyWelcome } from './my-welcome.js'
 
 const style =
     /* css */`
@@ -20,17 +21,18 @@ const style =
         max-width: 800px;
         margin-bottom: 30px !important;
         background-color: white;
-        padding: 20px;
         border-radius: 5px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         margin: auto;
     }
 
-    article:first-of-type {
+    article:nth-of-type(1) {
         padding: 60px;
     }
-    
-    article:last-of-type {
+    article:nth-of-type(2) {
+        padding: 30px 20px;
+    }
+    article:nth-of-type(3) {
         padding: 0;
     }
 
@@ -39,20 +41,6 @@ const style =
         background-color: #eee;
         padding: 5px;
         text-align: center;
-    }
-    
-    input[type=submit] {
-        background-color: #4f8fd3;
-        color: white;
-        padding: 10px 20px;
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-    }
-    
-    input[type=submit]:hover {
-        background-color: #0056b3;
     }`
 
 const styleEl = document.createElement('style')
@@ -63,14 +51,41 @@ document.head.appendChild(styleEl)
 class AssessmentPage extends HTMLElement {
     constructor() {
         super()
-        this.innerHTML = AssessmentPage.template()
+        this.data = window._data
+
+        const cookieData = JSON.parse(localStorage.getItem('user') || "{}")
+
+        let mapping
+        switch(cookieData.jobRole || 'unknown') {
+            case "People Leader":
+                mapping = "People Leader"
+                break;
+            case "Product Role":
+            case "Project Role":
+                mapping = "Product Owner"
+                break;
+            case "Mid Software Engineer":
+            case "Senior Software Engineer":
+            case "Lead Software Engineer":
+            default:
+                mapping = "Software Engineer"
+                break;
+        }
+
+        this.facets = this.data.facets[mapping]
+
+        localStorage.setItem("facets", JSON.stringify(this.facets))
+
+        this.innerHTML = AssessmentPage.template(this.facets)
     }
 
-    static template() {
-        return /* html */`
+    static template(facets, results=[]) {
+        const row = (row) => `<form-section data-ref="${row.facet}"></form-section>`
+
+        const firstCard = /* html */`
         <article>
             <h2>Self-Assessment for Software Engineers</h2>
-            <h4>Version 1.0 created Dec 16th 2023</h4>
+            <h4>Version 1.0.1</h4>
 
             <h3>Overview</h3>
             <p>The Self-Assessment for Software Engineers is a multi-faceted tool designed to help professionals in the field of software engineering to introspectively analyze their skills and capabilities across seven key areas. These facets encompass the diverse set of skills required to excel in software engineering, ranging from technical knowledge to interpersonal abilities.</p>
@@ -117,33 +132,78 @@ class AssessmentPage extends HTMLElement {
                     </ol>
                 </dd>
             </dl>
-        </article>
+        </article>`
 
+        const secondCard = /* html */` 
         <article>
             <form>
-                <form-section data-ref="Technical Expertise"></form-section>
-                <form-section data-ref="Leadership Skills"></form-section>
-                <form-section data-ref="Communication Skills"></form-section>
-                <form-section data-ref="Problem-Solving Abilities"></form-section>
-                <form-section data-ref="Project Management Skills"></form-section>
-                <form-section data-ref="Adaptability and Learning Ability"></form-section>
-                <form-section data-ref="Mentorship and Coaching Skills"></form-section>
-        
-                <input type="submit" value="Save as Complete">
+                ${facets.map(f=>row(f)).join('')}
+                <button type="submit">Save as Complete</button>
             </form>
-        </article>
-        
+        </article>`
+
+        return firstCard + secondCard
+    }
+
+    static template_results(facets, data) {
+        return /* html */`
         <article>
-            <radar-chart></radar-chart>
-        </article>
-`
+            <h2>Self Assessment Results</h2>
+            <radar-chart data-labels='${JSON.stringify(facets.map(f=>f.facet))}' data-values="${JSON.stringify(data)}", data-max="10" data-legend='["Results"]'></radar-chart>
+        </article>`
     }
 
     connectedCallback() {
-        const submitButton = document.querySelector('input[type="submit"]')
-        submitButton.onclick = (e) => {
-            e.preventDefault()
+        const submitButton = this.querySelector('button[type="submit"]')
+        if (submitButton) {
+            const form = this.querySelector('form')
+            submitButton.onclick = (e) => {
+                e.preventDefault()
+                const formData = new FormData(form)
+                const formJson = Object.fromEntries(formData)
+                const results = this.calculateResults(formJson)
+
+                // hide assessment form
+                document.querySelector('article:last-of-type').style.display = 'none'
+                
+                // save results locally
+                const user = JSON.parse(localStorage.getItem("user") || "{}")
+                user.lastAssessmentDate = (new Date()).toISOString()
+                user.lastAssessmentResults = results
+                localStorage.setItem("user", JSON.stringify(user))
+
+                // send to server
+                
+                // get aggregates?
+
+                // display results
+                const d = document.createElement('div')
+
+                const data = []
+                for (let k in results) {
+                    data.push(results[k].average)
+                }
+                d.innerHTML = AssessmentPage.template_results(this.facets, [data])
+                this.appendChild(d)
+            }
         }
+    }
+
+    calculateResults(formJson) {
+        return Object.entries(formJson).reduce((acc, [key, value]) => {
+            const facetId = key.split(':')[0]
+            value = parseInt(value)
+
+            if (!acc[facetId]) {
+                acc[facetId] = { sum: 0, count: 0, average: 0 }
+            }
+
+            acc[facetId].sum += value
+            acc[facetId].count += 1
+            acc[facetId].average = acc[facetId].sum / acc[facetId].count
+
+            return acc
+        }, {})
     }
 }
 

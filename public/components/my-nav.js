@@ -206,17 +206,8 @@ class MyNav extends HTMLElement {
         <nav>
             <ul class="primary">
             <li><a href="#assessment">Assessment</a></li>
-            <li><a href="#page-history">History</a></li>
-            <!--<li><a href="#page-role-targets">Role Targets</a></li>-->
-            <li><a>About</a>
-                <ul class="sub">
-                    <li>
-                        <a target="__blank" href="https://github.com/asynnestvedt">
-                            <img width="50" src="./assets/github-mark.png" alt="github logo" /><br>
-                            Made by Alan Synnestvedt
-                        </a>
-                    </li>
-                </ul>
+            <li><a href="#history">History</a></li>
+            <li><a href="#about" >About</a>
             </li>
             </ul>
         </nav>
